@@ -1,0 +1,60 @@
+<font size="+2"> Please login to continue</font><p>
+
+ <?php 
+
+  $con = mysql_connect("localhost","root","");
+  
+  mysql_select_db("registration", $con);
+
+     if(isset($_POST['submit'])){
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $sql = "SELECT email, password FROM users WHERE email ='$email' AND password = '$password'";
+$result = mysql_query($sql, $con);
+if(mysql_num_rows($result) > 0)
+{
+header('location: dashboard.php');
+}
+else {
+$error = " <h3 style= 'color:red;'>you have enter incorrect Username or  password </h3>";
+}
+}
+ 
+
+     ?>
+
+
+<p> <?php echo $error ;?> </p>
+<div class="sec">
+<form method="post" >
+
+<p>
+<table width="401" border="0" cellpadding="4">
+  
+
+  <tr>
+    <td colspan="2">
+    <input name="pnumber" type="text" size="59" class="enquiry" hspace="5px" placeholder="Phone Number OR Email Address"/></td>
+    </tr>
+  <tr>
+    <td colspan="2">
+    <input name="password" type="password" size="59" class="enquiry" hspace="5px" placeholder="Password" style="margin-top:-8px"/></td>
+    </tr>
+    <tr>
+    <td align="right">
+ <a href="#"> <u>Forgot Your Password?</u></a>
+      </td>
+      </tr>
+      <tr>
+    <td colspan="2"  >
+    <input name="Reset" type="submit"   value="Log me in" />
+    </td>
+    </tr>
+    
+</tr>
+</table>
+
+</form>
+</div>
